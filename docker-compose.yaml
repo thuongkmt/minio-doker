@@ -1,0 +1,54 @@
+version: '3'
+
+networks:
+  joconet:
+    driver: bridge
+services:
+  minio:
+    image: minio/minio
+    container_name: minio
+    hostname: minio
+    restart: always
+    networks: 
+      - joconet
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./data/storage:/data
+    environment:
+      MINIO_ROOT_USER: joco
+      MINIO_ROOT_PASSWORD: joco@2023
+    command: server --console-address ":9001" /data
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    networks: 
+      - joconet
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    environment:
+      DB_MYSQL_HOST: "db"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "npm"
+      DB_MYSQL_PASSWORD: "npm"
+      DB_MYSQL_NAME: "npm"
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    depends_on:
+      - db
+  db:
+    image: 'jc21/mariadb-aria:latest'
+    restart: unless-stopped
+    networks: 
+      - joconet
+    environment:
+      MYSQL_ROOT_PASSWORD: 'npm'
+      MYSQL_DATABASE: 'npm'
+      MYSQL_USER: 'npm'
+      MYSQL_PASSWORD: 'npm'
+    volumes:
+      - ./data/mysql:/var/lib/mysql
