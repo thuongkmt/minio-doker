@@ -11,8 +11,8 @@ builder.Services.AddMinio(
     options =>
     {
         options.Endpoint = "localhost:9000";
-        options.AccessKey = "9BoVgCwfKSc7PjM5";
-        options.SecretKey = "IsorQF1iotuGVRho3wVLViHwz6GqfMTc";
+        options.AccessKey = "xpT7Kmp1ZGi2l35F";
+        options.SecretKey = "ssNg5yoz0h7pqnzFeT9z1hP8zCBIMjYw";
 
     });
 

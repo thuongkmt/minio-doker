@@ -2,6 +2,6 @@
 {
     public interface IFileUploadService
     {
-        public Task<string> PutObject(string objectName, MemoryStream filestream);
+        public Task<string> PutObject(IFormFile file);
     }
 }

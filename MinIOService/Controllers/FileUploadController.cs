@@ -16,19 +16,10 @@ namespace MinIOService.Controllers
         }
 
         [HttpPost(Name = "Upload")]
-        public async Task<List<string>> Upload(IFormFile file)
+        public async Task<string> Upload(IFormFile file)
         {
-            var arrayFileName = new List<string>();
-            using (var memoryStream = new MemoryStream())
-            {
-                await file.CopyToAsync(memoryStream);
-                if (file.Length > 0)
-                {
-                    var filename = await _fileUploadService.PutObject(file.Name, memoryStream);
-                    arrayFileName.Add(filename);
-                }
-            }
-            return arrayFileName;
+            var filename = await _fileUploadService.PutObject(file);
+            return filename;
         }
     }
 }
