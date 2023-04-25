@@ -15,12 +15,12 @@ services:
       - "9000:9000"
       - "9001:9001"
     volumes:
-      - ./data/storage:/data
+      - ./data/storage/:/data
     environment:
       MINIO_ROOT_USER: joco
       MINIO_ROOT_PASSWORD: joco@2023
     command: server --console-address ":9001" /data
-  app:
+  npm-app:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
     networks: 
@@ -36,19 +36,22 @@ services:
       DB_MYSQL_PASSWORD: "npm"
       DB_MYSQL_NAME: "npm"
     volumes:
-      - ./data:/data
+      - ./data/npm/:/data
       - ./letsencrypt:/etc/letsencrypt
     depends_on:
       - db
   db:
     image: 'jc21/mariadb-aria:latest'
-    restart: unless-stopped
+    restart: always
     networks: 
       - joconet
+    ports:
+      - '3006:3006'
     environment:
       MYSQL_ROOT_PASSWORD: 'npm'
       MYSQL_DATABASE: 'npm'
       MYSQL_USER: 'npm'
       MYSQL_PASSWORD: 'npm'
     volumes:
-      - ./data/mysql:/var/lib/mysql
+      - ./data/mysql/:/var/lib/mysql
+      - ./data/mysql/myconfig/my.cnf:/etc/my.cnf
