@@ -20,6 +20,17 @@ services:
       MINIO_ROOT_USER: joco
       MINIO_ROOT_PASSWORD: joco@2023
     command: server --console-address ":9001" /data
+  minioservice:
+    image: minioservice/v0.0.2
+    container_name: minioservice
+    hostname: minioservice
+    restart: always
+    networks: 
+      - joconet
+    ports:
+      - "8080:80"
+    volumes:
+      - ./data/storage/:/publish/wwwroot
   npm-app:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
@@ -46,7 +57,7 @@ services:
     networks: 
       - joconet
     ports:
-      - '3006:3006'
+      - '3306:3306'
     environment:
       MYSQL_ROOT_PASSWORD: 'npm'
       MYSQL_DATABASE: 'npm'
