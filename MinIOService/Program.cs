@@ -30,12 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-           Path.Combine(builder.Environment.ContentRootPath, "storage")),
-    RequestPath = "/staticfile"
-});
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
