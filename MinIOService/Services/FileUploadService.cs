@@ -1,6 +1,7 @@
 ﻿using Minio;
 using Minio.DataModel;
 using MinIOService.Models;
+using System.Text;
 
 namespace MinIOService.Services
 {
@@ -87,7 +88,22 @@ namespace MinIOService.Services
             }
         }
 
+        public async Task<string> GetObject(string objectName, string bucketName)
+        {
+            //check object
+            var statObjectArgs = new StatObjectArgs()
+                       .WithBucket(bucketName)
+                       .WithObject(objectName);
+            var objectStat = await _minioClient.StatObjectAsync(statObjectArgs);
 
+            var getObjectArgs = new GetObjectArgs()
+                .WithBucket(bucketName)
+                .WithObject(objectName)
+                .WithFile(objectName);
+            var objectBack = await _minioClient.GetObjectAsync(getObjectArgs);
+
+            return "";
+        }
 
         public async Task<UploadedResponse> UploadLocalServer(IFormFile file, string folder)
         {

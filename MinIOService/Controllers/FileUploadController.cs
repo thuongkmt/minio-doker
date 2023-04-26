@@ -20,5 +20,12 @@ namespace MinIOService.Controllers
             var uploadedResponse = await _fileUploadService.PutObject(file, bucket);
             return uploadedResponse;
         }
+
+        [HttpGet]
+        public async Task<string> GetObject(string objectName, string bucket)
+        {
+            var uploadedResponse = await _fileUploadService.GetObject(objectName, bucket);
+            return uploadedResponse;
+        }
     }
 }
