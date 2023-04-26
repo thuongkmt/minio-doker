@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using MinIOService.Models;
 using MinIOService.Services;
-using System.IO.Compression;
 
 namespace MinIOService.Controllers
 {
@@ -15,11 +14,11 @@ namespace MinIOService.Controllers
             _fileUploadService = fileUploadService;
         }
 
-        [HttpPost(Name = "Upload")]
-        public async Task<string> Upload(IFormFile file)
+        [HttpPost]
+        public async Task<UploadedResponse> Upload(IFormFile file, string bucket)
         {
-            var filename = await _fileUploadService.PutObject(file);
-            return filename;
+            var uploadedResponse = await _fileUploadService.PutObject(file, bucket);
+            return uploadedResponse;
         }
     }
 }

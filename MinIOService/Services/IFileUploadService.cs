@@ -1,7 +1,9 @@
-﻿namespace MinIOService.Services
+﻿using MinIOService.Models;
+
+namespace MinIOService.Services
 {
     public interface IFileUploadService
     {
-        public Task<string> PutObject(IFormFile file);
+        public Task<UploadedResponse> PutObject(IFormFile file, string bucketName);
     }
 }
