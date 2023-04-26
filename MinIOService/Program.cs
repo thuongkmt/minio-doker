@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using Minio.AspNetCore;
 using MinIOService.Services;
 
@@ -28,6 +29,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(builder.Environment.ContentRootPath, "storage")),
+    RequestPath = "/staticfile"
+});
 
 app.UseAuthorization();
 

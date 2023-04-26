@@ -8,8 +8,6 @@ namespace MinIOService.Services
     public class FileUploadService : IFileUploadService
     {
         private MinioClient _minioClient;
-        private string bucketName = "images";
-        //private string contentType = "image/png";
 
         public FileUploadService(MinioClient minioClient) {
             _minioClient = minioClient;
