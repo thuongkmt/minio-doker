@@ -1,5 +1,7 @@
 ﻿using Minio;
 using Minio.DataModel;
+using MinIOService.Domain.Interfaces;
+using MinIOService.Domain.Models;
 using MinIOService.Models;
 using System.Text;
 
@@ -8,9 +10,11 @@ namespace MinIOService.Services
     public class FileUploadService : IFileUploadService
     {
         private MinioClient _minioClient;
+        private IStorageService _storageService;
 
-        public FileUploadService(MinioClient minioClient) {
+        public FileUploadService(MinioClient minioClient, IStorageService storageService) {
             _minioClient = minioClient;
+            _storageService = storageService;
         }
 
         [Obsolete]
@@ -51,6 +55,15 @@ namespace MinIOService.Services
                        .WithBucket(bucketName)
                        .WithObject(fileName);
                     objectStat = await _minioClient.StatObjectAsync(statObjectArgs);
+                    
+                    //insert into db
+                    var inserted = await _storageService.AddUpload(new UploadEntity
+                    {
+                        ContentType = contentType,
+                        Etag = objectStat.ETag,
+                        FileName = fileName,
+                        FileType = file.ContentType
+                    });
 
                     return new UploadedResponse
                     {
