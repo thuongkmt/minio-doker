@@ -21,16 +21,21 @@ services:
       MINIO_ROOT_PASSWORD: joco@2023
     command: server --console-address ":9001" /data
   minioservice:
-    image: minioservice/v0.0.2
+    build: ./MinIOService
+    image: minioservice:v0.0.6
     container_name: minioservice
     hostname: minioservice
     restart: always
     networks: 
       - joconet
     ports:
-      - "8080:80"
+      - "8080:8080"
     volumes:
       - ./data/storage/:/publish/wwwroot
+    depends_on:
+      - minio
+    links:
+      - minio
   npm-app:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
