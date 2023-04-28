@@ -21,8 +21,8 @@ services:
       MINIO_ROOT_PASSWORD: joco@2023
     command: server --console-address ":9001" /data
   minioservice:
-    build: ./MinIOService
-    image: minioservice:v0.0.6
+    build: ./MinIOServiceApp
+    image: minioservice:v0.0.9
     container_name: minioservice
     hostname: minioservice
     restart: always
