@@ -1,3 +1,8 @@
 # ignore 
 data/
 letsencrypt/
+/MinIOService.Domain/bin/Debug/net6.0
+/MinIOService.Domain/obj
+/MinIOService.Infrastructure/bin/Debug/net6.0
+/MinIOService.Infrastructure/obj/Debug/net6.0
+/MinIOService.Infrastructure/obj

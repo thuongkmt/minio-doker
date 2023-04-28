@@ -1,6 +1,7 @@
-﻿using MinIOService.Models;
+﻿using Microsoft.AspNetCore.Http;
+using MinIOService.Domain.Models;
 
-namespace MinIOService.Services
+namespace MinIOService.Domain.Interfaces
 {
     public interface IFileUploadService
     {

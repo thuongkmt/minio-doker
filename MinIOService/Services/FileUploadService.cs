@@ -2,7 +2,6 @@
 using Minio.DataModel;
 using MinIOService.Domain.Interfaces;
 using MinIOService.Domain.Models;
-using MinIOService.Models;
 using System.Text;
 
 namespace MinIOService.Services

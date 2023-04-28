@@ -13,13 +13,13 @@ builder.Services.AddControllers();
 builder.Services.AddMinio(
     options =>
     {
-        options.Endpoint = "localhost:9000";
+        options.Endpoint = "minio:9000";
         options.AccessKey = "9BoVgCwfKSc7PjM5";
         options.SecretKey = "IsorQF1iotuGVRho3wVLViHwz6GqfMTc";
     });
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
+/*var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
 var connectionString = "server=127.0.0.1;user=npm;password=npm;database=npm";
-builder.Services.AddDbContext<MinIOServiceDBContext>(options => options.UseMySql(connectionString, serverVersion));
+builder.Services.AddDbContext<MinIOServiceDBContext>(options => options.UseMySql(connectionString, serverVersion));*/
 
 builder.Services.AddTransient<IFileUploadService, FileUploadService>();
 builder.Services.AddTransient<IStorageService, StorageService>();

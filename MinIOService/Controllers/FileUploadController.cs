@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MinIOService.Models;
-using MinIOService.Services;
+using MinIOService.Domain.Interfaces;
+using MinIOService.Domain.Models;
 
 namespace MinIOService.Controllers
 {

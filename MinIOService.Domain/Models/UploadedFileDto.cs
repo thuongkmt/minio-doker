@@ -1,4 +1,4 @@
-﻿namespace MinIOService.Models
+﻿namespace MinIOService.Domain.Models
 {
     public class UploadedFileDto
     {
