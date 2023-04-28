@@ -31,7 +31,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./data/storage/:/publish/wwwroot
+      - ./data/storage/:/app/wwwroot
     depends_on:
       - minio
     links:
