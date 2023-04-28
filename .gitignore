@@ -1,5 +1,5 @@
 # ignore 
-/data/
+/data/mysql/
 /letsencrypt/
 /MinIOService.Domain/bin/Debug/net6.0
 /MinIOService.Domain/obj
