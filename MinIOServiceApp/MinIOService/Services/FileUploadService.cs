@@ -9,11 +9,11 @@ namespace MinIOService.Services
     public class FileUploadService : IFileUploadService
     {
         private MinioClient _minioClient;
-        private IStorageService _storageService;
+        //private IStorageService _storageService;
 
-        public FileUploadService(MinioClient minioClient, IStorageService storageService) {
+        public FileUploadService(MinioClient minioClient/*, IStorageService storageService*/) {
             _minioClient = minioClient;
-            _storageService = storageService;
+            //_storageService = storageService;
         }
 
         [Obsolete]
@@ -55,14 +55,14 @@ namespace MinIOService.Services
                        .WithObject(fileName);
                     objectStat = await _minioClient.StatObjectAsync(statObjectArgs);
                     
-                    //insert into db
+                    /*//insert into db
                     var inserted = await _storageService.AddUpload(new UploadEntity
                     {
                         ContentType = contentType,
                         Etag = objectStat.ETag,
                         FileName = fileName,
                         FileType = file.ContentType
-                    });
+                    });*/
 
                     return new UploadedResponse
                     {

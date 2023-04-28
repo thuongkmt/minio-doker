@@ -9,16 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+var configuration = builder.Configuration;
 // Url based configuration
 builder.Services.AddMinio(
     options =>
     {
-        options.Endpoint = "minio:9000";
-        options.AccessKey = "9BoVgCwfKSc7PjM5";
-        options.SecretKey = "IsorQF1iotuGVRho3wVLViHwz6GqfMTc";
+        options.Endpoint = configuration["MinIOService:Endpoint"];
+        options.AccessKey = configuration["MinIOService:AccessKey"];
+        options.SecretKey = configuration["MinIOService:SecretKey"];
     });
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 31));
-var connectionString = "server=127.0.0.1;user=npm;password=npm;database=npm";
+var connectionString = configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MinIOServiceDBContext>(options => options.UseMySql(connectionString, serverVersion));
 
 builder.Services.AddTransient<IFileUploadService, FileUploadService>();
