@@ -17,5 +17,5 @@ RUN dotnet publish "/src/MinIOService/MinIOService.csproj" -c Release -o /app
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 as runtime
 WORKDIR /app
 COPY --from=publish /app .
-EXPOSE 8080
+EXPOSE 8100 8101
 ENTRYPOINT ["dotnet", "MinIOService.dll"]
