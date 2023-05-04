@@ -44,8 +44,8 @@ services:
     networks: 
       - joconet
     ports:
-      - '80:80'
-      - '81:81'
+      - '8200:80'
+      - '8201:81'
       - '443:443'
     environment:
       DB_MYSQL_HOST: "db"
@@ -55,6 +55,7 @@ services:
       DB_MYSQL_NAME: "npm"
     volumes:
       - ./data/npm/:/data
+      - ./data/storage/:/data/fileupload.alo-sale.com
       - ./letsencrypt:/etc/letsencrypt
     depends_on:
       - db
